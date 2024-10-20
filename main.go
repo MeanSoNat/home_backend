@@ -14,11 +14,11 @@ import (
 var (
 	server                 *gin.Engine
 	AuthController         controllers.AuthController
-	AuthRouteController    routes.AuthRouteController //มาเป็นคู่
+	AuthRouteController    routes.AuthRouteController
 	AdminController        controllers.AdminController
-	AdminRouteController   routes.AdminRouteController //มาเป็นคู่
-	TeacherController      *controllers.TeacherController 
-	TeacherRouteController routes.TeacherRouteController // มาเป็นคู่ใหม่สำหรับครู
+	AdminRouteController   routes.AdminRouteController
+	TeacherController      *controllers.TeacherController
+	TeacherRouteController routes.TeacherRouteController
 	StudentController      *controllers.StudentController
 )
 
@@ -32,8 +32,13 @@ func init() {
 	AuthController = controllers.NewAuthController(initializers.DB)
 	AuthRouteController = routes.NewAuthRouteController(AuthController)
 
-	TeacherController = controllers.NewTeacherController(initializers.DB)         // กำหนดค่า TeacherController
+	AdminController = controllers.NewAdminController(initializers.DB)      // กำหนดค่า AdminController
+	AdminRouteController = routes.NewAdminRouteController(AdminController) // กำหนดค่า AdminRouteController
+
+	TeacherController = controllers.NewTeacherController(initializers.DB)        // กำหนดค่า TeacherController
 	TeacherRouteController = routes.NewTeacherRouteController(TeacherController) // กำหนดค่า TeacherRouteController
+
+	StudentController = controllers.NewStudentController(initializers.DB) // กำหนดค่า StudentController
 
 	server = gin.Default()
 }
@@ -58,9 +63,9 @@ func main() {
 	})
 
 	AuthRouteController.AuthRoute(router)
-	AdminRouteController.AdminRoute(router)
-	TeacherRouteController.TeacherRoutes(router) // เพิ่มเส้นทางล็อกอินสำหรับครู
-	routes.StudentRoutes(router, StudentController)
+	AdminRouteController.AdminRoute(router)         // เส้นทาง Admin
+	TeacherRouteController.TeacherRoutes(router)    // เส้นทาง Teacher
+	routes.StudentRoutes(router, StudentController) // เส้นทาง Student
 
 	server.NoRoute(func(ctx *gin.Context) {
 		ctx.JSON(http.StatusNotFound, gin.H{"status": "error", "message": "Route Not Found"})

@@ -7,7 +7,7 @@ type Student struct {
 	Name          string `gorm:"type:varchar(255)"` // ชื่อ
 	Nickname      string `gorm:"type:varchar(255)"` // ชื่อเล่น
 	Idcard        string `gorm:"type:varchar(255)"` //
-	StuId         int
+	StuId         int    `gorm:"type:integer"`
 	StuPhone      string `gorm:"type:varchar(100)"` //
 	StuClass      string `gorm:"type:varchar(10)"`  //
 	StuBirthDate  string `gorm:"type:varchar(255)"` //
@@ -18,12 +18,12 @@ type Student struct {
 	FatherName    string `gorm:"type:varchar(255)"` // ชื่อบิดา
 	FatherJob     string `gorm:"type:varchar(255)"` // อาชืพบิดา
 	FatherPhone   string `gorm:"type:varchar(255)"` // เบอร์บิดา
-	FatherSalary  int    // เงินเดือนบิดา
+	FatherSalary  int    `gorm:"type:integer"`      // เงินเดือนบิดา
 	FatherEdu     string `gorm:"type:varchar(255)"` //การศึกษาบิดา
 	MotherName    string `gorm:"type:varchar(255)"` // ชื่อมารดา
 	MotherJob     string `gorm:"type:varchar(255)"` // อา��ีพมารดา
 	MotherPhone   string `gorm:"type:varchar(255)"` // เบอร์มารดา
-	MotherSalary  int    // เงินเดือนมารดา
+	MotherSalary  int    `gorm:"type:integer"`      // เงินเดือนมารดา
 	MotherEdu     string `gorm:"type:varchar(255)"` //การ����ก��ามารดา
 	ParentName    string `gorm:"type:varchar(255)"` // ชื่อ��ู้ปกครอง
 	Relation      string `gorm:"type:varchar(255)"` //

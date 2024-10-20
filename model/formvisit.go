@@ -1,15 +1,14 @@
 package model
 
-
-type Form struct {
-	ID int
-	StudentID int
-	TeacherID int
-	ResidenceScore int
-	EnvironmentScore int
+type Formvisit struct {
+	ID                int
+	StudentID         int
+	TeacherID         int
+	ResidenceScore    int
+	EnvironmentScore  int
 	RelationshipScore int
-	FamilyScore int
-	StudentScore int
-	SchoolScore int
-	PhotosvisitPath string `gorm:"type:varchar(255)"`
+	FamilyScore       int
+	StudentScore      int
+	SchoolScore       int
+	PhotosvisitPath   string `gorm:"type:varchar(255)"`
 }

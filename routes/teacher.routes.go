@@ -14,5 +14,8 @@ func NewTeacherRouteController(teacherController *controllers.TeacherController)
 }
 
 func (trc *TeacherRouteController) TeacherRoutes(router *gin.RouterGroup) {
-    router.POST("/teacher/login", trc.teacherController.Login) // ใช้ชื่อฟังก์ชันที่ถูกต้อง
+    router.POST("/teacher/login", trc.teacherController.Login) // Endpoint สำหรับล็อกอิน
+    router.GET("/teacher/students/:id", trc.teacherController.GetStudentsByClass) // Endpoint สำหรับดึงนักเรียน
 }
+ 
+

@@ -1,11 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/Makeyabe/Home_Backend/controllers"
 	"github.com/Makeyabe/Home_Backend/initializers"
+	"github.com/Makeyabe/Home_Backend/model"
 	"github.com/Makeyabe/Home_Backend/routes"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -40,7 +42,25 @@ func init() {
 
 	StudentController = controllers.NewStudentController(initializers.DB) // กำหนดค่า StudentController
 
+	err = initializers.DB.AutoMigrate(
+		&model.Student{},
+		&model.Teacher{},
+		&model.Booking{},
+		&model.Summary{},
+		&model.Formvisit{},
+		&model.Formcheck{},
+		&model.SectionForm{},
+		&model.Subsection{},
+		&model.Field{},
+		&model.Option{},
+	)
+	if err != nil {
+		log.Fatal("Migration failed:", err)
+	}
+	fmt.Println("? Migration complete")
+
 	server = gin.Default()
+
 }
 
 func main() {
@@ -72,4 +92,5 @@ func main() {
 	})
 
 	log.Fatal(server.Run(":" + config.ServerPort))
+
 }

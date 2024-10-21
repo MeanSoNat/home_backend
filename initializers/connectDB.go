@@ -18,6 +18,6 @@ func ConnectDB(config *Config) {
 	if err != nil {
 		log.Fatal("Failed to connect to the Database")
 	}
-	fmt.Println("? Connected Successfully to the Database")
+	fmt.Printf("? Connected Successfully to the Database %s \n", config.DBName)
 }
 

@@ -1,0 +1,28 @@
+{
+    "form": {
+        "sectionforms": [
+            {
+                "sectionLabel": "Housing",
+                "subsection": [
+                    {
+                        "label": "House Characteristics",
+                        "fields": [
+                            {
+                                "label": "Type of House",
+                                "inputType": "checkbox",
+                                "options": [
+                                    { "label": "บ้านปูนชั้นเดียว", "checked": false },
+                                    { "label": "บ้านไม้ชั้นเดียว", "checked": false },
+                                    { "label": "บ้านปูนสองชั้น", "checked": false },
+                                    { "label": "บ้านสองชั้นครึ่งไม้ครึ่งปูน", "checked": false },
+                                    { "label": "ตึกแถว อาคารพานิชย์ ทาวเฮาส์", "checked": false },
+                                    { "label": "อื่นๆ", "checked": false }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

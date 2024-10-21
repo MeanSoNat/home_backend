@@ -18,10 +18,10 @@ func init() {
 }
 
 func main() {
-	err := initializers.DB.AutoMigrate(&model.Student{}, &model.Teacher{}, &model.Booking{}, &model.Summary{}, &model.Formvisit{})
-	if err != nil {
-		log.Fatal("? Migration failed", err)
-	}
-
+	initializers.DB.AutoMigrate(&model.Student{})
+	initializers.DB.AutoMigrate(&model.Teacher{})
+	initializers.DB.AutoMigrate(&model.Booking{})
+	initializers.DB.AutoMigrate(&model.Summary{})
+	initializers.DB.AutoMigrate(&model.Formvisit{})
 	fmt.Println("? Migration complete")
 }

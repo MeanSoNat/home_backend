@@ -1,13 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/Makeyabe/Home_Backend/controllers"
 	"github.com/Makeyabe/Home_Backend/initializers"
-	"github.com/Makeyabe/Home_Backend/model"
 	"github.com/Makeyabe/Home_Backend/routes"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -22,6 +20,7 @@ var (
 	TeacherController      *controllers.TeacherController
 	TeacherRouteController routes.TeacherRouteController
 	StudentController      *controllers.StudentController
+	FormController         *controllers.FormController
 )
 
 func init() {
@@ -41,23 +40,7 @@ func init() {
 	TeacherRouteController = routes.NewTeacherRouteController(TeacherController) // กำหนดค่า TeacherRouteController
 
 	StudentController = controllers.NewStudentController(initializers.DB) // กำหนดค่า StudentController
-
-	err = initializers.DB.AutoMigrate(
-		&model.Student{},
-		&model.Teacher{},
-		&model.Booking{},
-		&model.Summary{},
-		&model.Formvisit{},
-		&model.Formcheck{},
-		&model.SectionForm{},
-		&model.Subsection{},
-		&model.Field{},
-		&model.Option{},
-	)
-	if err != nil {
-		log.Fatal("Migration failed:", err)
-	}
-	fmt.Println("? Migration complete")
+	FormController = controllers.NewFormController(initializers.DB)
 
 	server = gin.Default()
 
@@ -86,6 +69,7 @@ func main() {
 	AdminRouteController.AdminRoute(router)         // เส้นทาง Admin
 	TeacherRouteController.TeacherRoutes(router)    // เส้นทาง Teacher
 	routes.StudentRoutes(router, StudentController) // เส้นทาง Student
+	routes.FormRoutes(router, FormController)
 
 	server.NoRoute(func(ctx *gin.Context) {
 		ctx.JSON(http.StatusNotFound, gin.H{"status": "error", "message": "Route Not Found"})

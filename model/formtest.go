@@ -1,7 +1,6 @@
 package model
 
 import (
-	"errors"
 	"time"
 
 	"gorm.io/gorm"
@@ -37,20 +36,9 @@ type FormField struct {
 	FieldType  string         `gorm:"type:varchar(50);not null"`                            // Field type (e.g., "text", "radio", "checkbox")
 	Options    string         `gorm:"type:text"`                                            // JSON string of options for radio/checkbox fields (optional)
 	FieldOrder int            `gorm:"not null"`                                             // Order of the field in the section
-	FieldScore int            `gorm:"not null;default:1;check:field_score_between_1_and_5"` // Score (must be between 1 and 5 and set default point as 1)
+	FieldScore int            `gorm:"default:null"` // Score (must be between 1 and 5 and set default point as 1)
 	CreatedAt  time.Time      `json:"-"`                                                    // Exclude CreatedAt from JSON
 	UpdatedAt  time.Time      `json:"-"`                                                    // Exclude UpdatedAt from JSON
 	DeletedAt  gorm.DeletedAt `json:"-"`                                                    // Exclude DeletedAt from JSON
 }
 
-func (f *FormField) ValidateFieldScore() error {
-	if f.FieldScore < 1 || f.FieldScore > 5 {
-		return errors.New("FieldScore must between 1 and 5")
-	}
-	return nil
-}
-
-func (f *FormField) beforeSave(_ *gorm.DB) (err error) {
-	err = f.ValidateFieldScore()
-	return
-}

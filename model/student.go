@@ -2,11 +2,8 @@ package model
 
 type Student struct {
 	ID            int    `gorm:"type:autoIncrement;primaryKey"`
-	Username      string `gorm:"type:varchar(255)"`
-	Password      string `gorm:"type:varchar(255)"` // รหัส��่าน
 	Name          string `gorm:"type:varchar(255)"` // ชื่อ
 	Nickname      string `gorm:"type:varchar(255)"` // ชื่อเล่น
-	Idcard        string `gorm:"type:varchar(255)"` //
 	StuId         int    `gorm:"type:integer"`
 	StuPhone      string `gorm:"type:varchar(100)"` //
 	StuClass      string `gorm:"type:varchar(10)"`  //
@@ -35,6 +32,9 @@ type Student struct {
 	SibStudy      string `gorm:"type:varchar(255)"`
 	EmpCount      string `gorm:"type:varchar(255)"`
 	UnempCount    string `gorm:"type:varchar(255)"`
+	Username      string `gorm:"type:varchar(255)"`
+	Password      string `gorm:"type:varchar(255)"` // รหัส��่าน
+	Idcard        string `gorm:"type:varchar(255)"` //
 	MapUrl        string `gorm:"type:text"`
 }
 
